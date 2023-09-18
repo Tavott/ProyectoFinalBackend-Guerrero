@@ -28,7 +28,8 @@ import swaggerJsDoc from 'swagger-jsdoc'
 import swaggerUiExpress from 'swagger-ui-express'
 
 const app = express()
-const PORT = 8080
+//const PORT = 8080
+const PORT = 3050
 
 dbConnection()
 

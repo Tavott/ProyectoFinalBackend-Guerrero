@@ -66,3 +66,5 @@
 {"0":{"__v":0,"_id":"64010a6571f4e310587dbb00","cart":"64b38d3a22a55b0e16481d08","category":"mails","code":600,"description":"Producto para Mongo","id":"64010a6571f4e310587dbb00","price":1500,"status":"true","stock":1,"thumbnail":"https://loremflickr.com/640/480/business","title":"Remplazo para Mongo"},"level":"info","message":"docs: "}
 {"level":"info","message":"login passport"}
 {"level":"info","message":null}
+{"level":"info","message":"login passport"}
+{"level":"info","message":null}
