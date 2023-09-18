@@ -32,6 +32,7 @@ const PORT = 8080
 
 dbConnection()
 
+mongoose.set('strictQuery', true);
 const productManager = new ProductManager
 const productsService = new ProductsService
 
