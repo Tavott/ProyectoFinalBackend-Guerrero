@@ -1,6 +1,7 @@
 import { connect } from "mongoose"
 import config from "./env.js"
 
+mongoose.set('strictQuery', true);
 const URL = config.mongoUrl
 const dbConnection = async () => {
     return await connect(URL, err => {
