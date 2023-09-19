@@ -25,6 +25,7 @@ const logger = winston.createLogger({
         new winston.transports.Console({
             level: 'debug',
             format: winston.format.combine(
+                //Esta Colorizacion Rompe Codigo.
                 // winston.format.colorize({colors: customLevels.colors}),
                 winston.format.simple()
             )
