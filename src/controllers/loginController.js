@@ -48,6 +48,7 @@ class LoginController {
                 let last_connection = moment().format("YYYY MM DD");
                 req.logger.info("last_connection: ", last_connection);
                 await userService.updateLastConnection(username, last_connection.toString())
+                //cambio para redireccion en Vivo
                 // res.redirect('http://localhost:8080/products')
                 res.redirect('/products')
             } else {
@@ -60,6 +61,7 @@ class LoginController {
                 let last_connection = moment().format("YYYY MM DD");
                 req.logger.info("last_connection: ", last_connection);
                 await userService.updateLastConnection(username, last_connection.toString())
+                //cambio para redireccion en Vivo
                 // res.redirect('http://localhost:8080/products')
                 res.redirect('/products')
             }
