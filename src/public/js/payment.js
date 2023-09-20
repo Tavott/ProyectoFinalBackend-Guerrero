@@ -1,42 +1,55 @@
-let paymentBtn = document.querySelector('#pago')
-let payContainer = document.querySelector('#payForm')
+let paymentBtn = document.querySelector('#pago');
 
-paymentBtn.addEventListener('click', async (event)=>{
-    event.preventDefault()
+paymentBtn.addEventListener('click', async (event) => {
+    event.preventDefault();
 
+    try {
+        // Realiza una solicitud POST a la API de payment-intents
+        const response = await fetch('/api/payment/payment-intents', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-    //Proximamente.
-    
-    // try {
-    //     fetch('/api/payment/payment-intents', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type':'application/json',
-    //         }
-    //     }
-    //     )
-    //     .then(resp => resp.json())
-    //     .then(resp => {
-    //         console.log(resp)
-    //         console.log(resp.status.error==='error')
-            
-    //         if(!(resp.status==='error')){
-    //             payContainer.innerHTML = `  <form action="">
-    //                                             <p>Ingrese el numero de la tarjeta</p>
-    //                                             <input type="number">
-                                        
-    //                                             <p>Ingrese la fecha de expiracion de la tarjeta</p>
-    //                                             <input type="number">
-                                        
-    //                                             <p>Ingrese el CVC de la tarjeta</p>
-    //                                             <input type="number">
-    //                                         </form>`
-    //         }
-    //     })
-    // } catch (error) {
-    //     console.log(error);   
-    // }
+        // Comprueba si la respuesta es exitosa
+        if (response.ok) {
+            const data = await response.json();
 
-
-    
-})
+            // Comprueba si el estado es "error" en lugar de "status.error"
+            if (data.status === 'error') {
+                console.error('Error en la respuesta:', data.error);
+            } else {
+                // Abre el resultado en una nueva ventana o pestaña
+                const newWindow = window.open('', '_blank');
+                if (newWindow) {
+                    // Escribe el contenido de payContainer en la nueva ventana
+                    newWindow.document.write(`
+                        <html>
+                        <head>
+                            <title>Página de Pago</title>
+                        </head>
+                        <body>
+                            <h1>Formulario de Pago</h1>
+                            <form action="">
+                                <p>Ingrese el número de la tarjeta</p>
+                                <input type="number">
+                                <p>Ingrese la fecha de expiración de la tarjeta</p>
+                                <input type="number">
+                                <p>Ingrese el CVC de la tarjeta</p>
+                                <input type="number">
+                            </form>
+                        </body>
+                        </html>
+                    `);
+                } else {
+                    console.error('No se pudo abrir una nueva ventana.');
+                }
+            }
+        } else {
+            console.error('Error en la solicitud:', response.status);
+        }
+    } catch (error) {
+        console.error('Error inesperado:', error);
+    }
+});

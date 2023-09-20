@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { request } from "express"
-import { createHash, isValidPassword } from "../ultis/bcrypt.js"
+import { createHash, isValidPassword } from "../utils/bcrypt.js"
 import { createTransport } from 'nodemailer'
 import moment from 'moment'
 import UserService from "../services/userService.js"

@@ -4,7 +4,7 @@ import local from "passport-local"
 import { MongoUserManager } from "../dao/mongo/MongoUserManager.js";
 import { MongoCartManager } from '../dao/mongo/MongoCartManager.js'
 import UserService from "../services/userService.js";
-import { createHash, isValidPassword } from "../ultis/bcrypt.js";
+import { createHash, isValidPassword } from "../utils/bcrypt.js";
 import UserModel from '../dao/mongo/models/user.js'
 import config from '../config/env.js';
 

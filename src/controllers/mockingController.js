@@ -1,19 +1,31 @@
 import { request } from "express";
-import { generateProduct } from "../ultis/faker.js";
+import { generateProduct } from "../utils/faker.js";
 
-class MockingController{
+
+class MockingController {
     getMocks = async (req = request, res) => {
-        let products = []
+        try {
+            const numProductsToGenerate = 10; // Limitar la cantidad de productos generados
+            const products = [];
 
-        for (let i = 0; i < 100; i++) {
-            let product = generateProduct()
-            products.push(product)
+            for (let i = 0; i < numProductsToGenerate; i++) {
+                const product = generateProduct();
+                products.push(product);
+            }
+
+            res.status(200).json({
+                status: 'success',
+                message: 'Datos ficticios generados con éxito',
+                payload: products
+            });
+        } catch (error) {
+            console.error('Error al generar datos ficticios:', error);
+            res.status(500).json({
+                status: 'error',
+                message: 'Ocurrió un error al generar datos ficticios'
+            });
         }
-        res.send({
-            status: 'ok',
-            payload: products
-        })
     }
 }
 
-export default MockingController
+export default MockingController;

@@ -1,7 +1,8 @@
 <div>
     <div class="header">
+        {{!-- <h2>Bienvenido {{username}}</h2> --}}
         <h2>Bienvenido {{username}}</h2>
-
+        
         <form action="../auth/logout" method="post">
             <button id="logout" class="btnInverted">Cerrar sesion</button>
         </form>
@@ -10,12 +11,12 @@
             <button  class="btnInverted">Productos</button>
         </form>
     </div>
-    <h2>Todos los Productos Del Carrito</h2>
-    
+    <h2>Productos Del Carrito</h2>
+    <h2>Verifica tu Compra</h2>
     <div class="productsContainer">
         {{#each productos}}
             <div class="card">
-                <img src="/public/media/kennyProduct.png" alt="producto" height="150px">
+                <img src="{{this.thumbnail}}" alt="producto" height="150px">
                 <div class="dataContainer">
                     <h3>{{this.pid.title}}</h3>
                     <div class="description">
@@ -24,16 +25,19 @@
                         <p>Precio: {{this.pid.price}}</p>
                     </div>
                 </div>
-                <form action="../api/carts/{{cart}}/product/{{this._id}}" method="post">
-                    <button type="submit">agragar al carrito</button>
+                <form action="../api/carts/{{cart}}/product/{{this._id}}" method="delete">
+                    <button type="submit">Eliminar del carrito</button>
                 </form>
+                {{!-- <form action="../api/carts/{{cart}}/product/{{this._id}}" method="delete">
+                    <button type="submit">Eliminar del carrito</button>
+                </form> --}}
             </div>
         {{/each}}
     </div>
 
-    {{!-- <form action="../api/payment" method="post"> --}}
+    <form action="../api/payment" method="post">
         <button id="pago">pagar</button>
-    {{!-- </form> --}}
+    </form>
     
     <div id="payForm"></div>
 

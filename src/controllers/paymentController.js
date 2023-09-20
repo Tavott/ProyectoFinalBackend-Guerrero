@@ -1,5 +1,5 @@
 import { request } from "express";
-import PaymentService from '../ultis/stripe.js'
+import PaymentService from '../utils/stripe.js'
 import UserService from "../services/userService.js";
 import CartsService from "../services/cartsService.js";
 import TicketService from "../services/ticketService.js";

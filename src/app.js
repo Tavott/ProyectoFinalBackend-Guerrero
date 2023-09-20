@@ -22,7 +22,7 @@ import dbConnection from './config/dbConnection.js'
 import chatModel from "./dao/mongo/models/chat.js"
 import { initPassport } from './config/passport.js'
 import errorMid from './middleware/errorMid.js'
-import { addLogger } from './ultis/logger.js'
+import { addLogger } from './utils/logger.js'
 
 import swaggerJsDoc from 'swagger-jsdoc'
 import swaggerUiExpress from 'swagger-ui-express'

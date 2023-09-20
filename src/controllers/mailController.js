@@ -1,7 +1,7 @@
 import { request } from "express";
 import { createTransport } from 'nodemailer'
 import config from '../config/env.js';
-import { generateToken } from "../ultis/jwt.js";
+import { generateToken } from "../utils/jwt.js";
 import UserService from "../services/userService.js";
 
 const userService = new UserService

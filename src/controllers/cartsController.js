@@ -2,6 +2,7 @@ import { request } from "express";
 import CartsService from "../services/cartsService.js";
 import ProductsService from "../services/productsService.js";
 import TicketService from "../services/ticketService.js";
+import Swal from 'sweetalert2';
 
 const ticketManager = new TicketService
 const productsService = new ProductsService
@@ -16,7 +17,7 @@ class CartsController {
 
     getCartProducts = async (req = request, res) => {
         const { cid } = req.params
-        const {limit = 1 , page = 1, query} = req.query
+        const {limit = 3 , page = 1, query} = req.query
         try {
             const cartProducts = await cartsService.getCartProducts(cid, limit, page)
             
@@ -31,9 +32,11 @@ class CartsController {
 
         try {
             let data = await cartsService.uploadProduct(cid, pid)
-
-            // res.send({mensaje: "producto agregado al carrito", payload: data})
-            alert(data.message);
+           
+            res.send({mensaje: "producto agregado al carrito", payload: data});
+            // setTimeout(() => {
+            //     res.redirect('/products'); 
+            //   }, 2000);
         } catch (error) {
             req.logger.error(error)
         }
