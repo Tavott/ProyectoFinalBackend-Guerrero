@@ -4,12 +4,22 @@ paymentBtn.addEventListener('click', async (event) => {
     event.preventDefault();
 
     try {
+
+        const amountValue = document.querySelector('#payForm').value; // Asume que tienes un input con id "amountInput"
+
+        // Construye el objeto de datos para la solicitud POST
+        const postData = {
+            amount: amountValue, // Asigna el valor del amount
+            // Otros campos de datos si es necesario...
+        };
+        
         // Realiza una solicitud POST a la API de payment-intents
         const response = await fetch('/api/payment/payment-intents', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify(postData), // Convierte el objeto de datos a JSON
         });
 
         // Comprueba si la respuesta es exitosa

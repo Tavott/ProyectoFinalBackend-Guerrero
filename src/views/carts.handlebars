@@ -16,7 +16,7 @@
     <div class="productsContainer">
         {{#each productos}}
             <div class="card">
-                <img src="{{this.thumbnail}}" alt="producto" height="150px">
+                <img src="{{this.pid.thumbnail}}" alt="producto" height="150px">
                 <div class="dataContainer">
                     <h3>{{this.pid.title}}</h3>
                     <div class="description">
@@ -28,6 +28,7 @@
                 <form action="../api/carts/{{cart}}/product/{{this._id}}" method="delete">
                     <button type="submit">Eliminar del carrito</button>
                 </form>
+                 {{!-- <td class="text-center"><button class="btn btn-outline-danger" data-id="{{this.product._id}}">Delete</button></td> --}}
                 {{!-- <form action="../api/carts/{{cart}}/product/{{this._id}}" method="delete">
                     <button type="submit">Eliminar del carrito</button>
                 </form> --}}
@@ -38,16 +39,18 @@
     <form action="../api/payment" method="post">
         <button id="pago">pagar</button>
     </form>
-    
-    <div id="payForm"></div>
+     {{!-- {{#each productos}}
+    <p>Total: <span id="totalAmount">{{getTotalAmount productos}}</span></p>
+    {{/each}}
+    <div id="payForm"></div> --}}
 
-    {{#if hasPrevPage}}
+    {{!-- {{#if hasPrevPage}}
         <a href="/products?page={{prevPage}}&&query={{query}}&&limit={{limit}}"><button>Anterior</button></a>
     {{/if}}
     <p>{{page}}</p>
     {{#if hasNextPage}}
         <a href="/products?page={{nextPage}}&&query={{query}}&&limit={{limit}}"><button>Siguiente</button></a>
-    {{/if}}
+    {{/if}} --}}
 
     <script src="../public/js/payment.js"></script>
 </div>

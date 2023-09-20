@@ -1,4 +1,5 @@
 import cartsModel from "./models/carts.js"
+// import Swal from 'sweetalert2';
 
 export class MongoCartManager {
 
@@ -35,6 +36,7 @@ export class MongoCartManager {
                         ]
                     }
                 )
+                // Swal.fire('Éxito', 'Producto agregado al carrito', 'success');
                 return await cartsModel.find({_id: cid})
             }
     

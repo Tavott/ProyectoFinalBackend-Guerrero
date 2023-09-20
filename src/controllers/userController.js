@@ -66,7 +66,7 @@ class UserController{
                         })
 //Configurar mail
                         let result = await transport.sendMail({
-                            from:'Servicio de Node <javiermaita22@gmail.com>',
+                            from:'Servicio de Node <guerreroagustavo@hotmail.com>',
                             to: user.email,
                             subject: 'Su cuenta fue eliminada',
                             html: `

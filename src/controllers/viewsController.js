@@ -7,7 +7,7 @@ const userService = new UserService
 
 class ViewsController {
     productsRender = async (req = request, res) => {
-        const {limit = 1 , page = 1, query} = req.query
+        const {limit = 3 , page = 1, query} = req.query
         let filtro = {}
         query? filtro = {category: query} : filtro = {}
         try {
@@ -39,7 +39,7 @@ class ViewsController {
 
     cartsRender = async (req = request, res) => {
         const {cid} = req.params
-        const {limit = 1 , page = 1} = req.query
+        const {limit = 5 , page = 1} = req.query
         try {
             const {docs, hasPrevPage, hasNextPage, prevPage, nextPage} = await viewsService.getCartProducts(cid, limit, page)
             let data = docs[0].products

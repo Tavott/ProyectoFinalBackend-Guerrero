@@ -30,7 +30,7 @@ export class MailController {
             })
              //Modificar SendMail   
             let result = await transport.sendMail({
-                from:'Servicio de Node <javiermaita22@gmail.com>',
+                from:'Servicio de Node <guerreroagustavo@hotmail.com>',
                 to: email,
                 subject: 'Restablecer contraseña',
                 html: `

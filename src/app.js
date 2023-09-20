@@ -64,7 +64,7 @@ const swaggerOptions = {
         openapi: '3.0.1',
         info: {
             title: 'Documentación de Proyecto CoderHouse Comision-32270',
-            description: 'Proyecto desarrollado por Javier Maita'
+            description: 'Proyecto desarrollado por Gustavo Guerrero'
         }
     },
     apis: [`${__dirname}/docs/**/*.yaml`]

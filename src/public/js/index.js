@@ -69,6 +69,7 @@ ioServer.on('productoAgregado', data =>{
                                         <p>Identificador: ${element._id}</p> 
                                     </div>`
     })
+    alertify.success("Producto agregado al carrito");
 })
 
 ioServer.on('prodcutoEliminado', data =>{

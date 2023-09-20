@@ -38,6 +38,9 @@ class ProductsController {
             let product = await productsService.addProduct({title, description, price, thumbnail, code, stock, category, owner})
 
             res.send(product)
+            //test
+            alertify.success(response.data.mensaje);
+            window.location.href = '/products';
         } catch (error) {
             req.logger.error(error)
         }
@@ -81,7 +84,7 @@ class ProductsController {
                     })
 
                     await transport.sendMail({
-                        from:'Servicio de Node <javiermaita22@gmail.com>',
+                        from:'Servicio de Node <guerreroagustavo@hotmail.com>',
                         to: user.email,
                         subject: 'Su Producto fue eliminado',
                         html: `

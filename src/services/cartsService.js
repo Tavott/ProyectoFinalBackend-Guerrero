@@ -34,6 +34,10 @@ class CartsService {
     async arrayProductsUpdate(cid, data){
         return await mongoCartManager.arrayProductsUpdate(cid, data)
     }
+
+    async getTotalAmount(cid, data){
+        return await mongoCartManager.getTotalAmount(cid, data)
+    }
 }
 
 export default CartsService

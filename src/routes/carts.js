@@ -24,6 +24,8 @@ router.delete('/:cid', cartsController.deleteCartProducts)
 
 router.put('/:cid', cartsController.arrayProductsUpdate)
 
+router.get('/carts/:cid/totalAmount', cartsController.getTotalAmount);
+
 router.post('/:cid/purchase', cartsController.createTicket)
 
 export default router
