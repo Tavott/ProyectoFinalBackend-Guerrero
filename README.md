@@ -12,11 +12,4 @@ Ejecutar el servidor
 ```sh
 npm start
 ```
-- Ejecución utilizando MongoDB
-```sh
-npm run mongo
-```
-- Ejecución utilizando FileSystem
-```sh
-npm run files
-```
+
