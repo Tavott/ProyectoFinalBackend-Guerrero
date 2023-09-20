@@ -33,7 +33,7 @@ class CartsController {
             let data = await cartsService.uploadProduct(cid, pid)
 
             // res.send({mensaje: "producto agregado al carrito", payload: data})
-
+            alert(data.message);
         } catch (error) {
             req.logger.error(error)
         }
