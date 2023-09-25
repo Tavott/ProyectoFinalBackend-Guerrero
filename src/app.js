@@ -63,7 +63,7 @@ const swaggerOptions = {
     definition: {
         openapi: '3.0.1',
         info: {
-            title: 'Documentación de Proyecto CoderHouse Comision-32270',
+            title: 'Documentación de Proyecto CoderHouse Comision-51220',
             description: 'Proyecto desarrollado por Gustavo Guerrero'
         }
     },

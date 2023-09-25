@@ -72,7 +72,7 @@ class LoginController {
 
     registerVoid = (req = request, res)=>{
         try {
-            res.redirect('http://localhost:8080/auth/login')
+            res.redirect('/auth/login')
         } catch (error) {
             req.logger.error(error)
         }
@@ -81,7 +81,7 @@ class LoginController {
     logoutVoid = (req = request, res)=>{
         try {
             req.session.destroy(err => {
-                if(!err) res.redirect('http://localhost:8080/auth/login')
+                if(!err) res.redirect('/auth/login')
                 else res.send({status:'Logout error', message: err})
             })
         } catch (error) {
@@ -100,7 +100,7 @@ class LoginController {
             let last_connection = moment().format("YYYY MM DD");
             req.logger.info(`last_connection: ${last_connection}`);
             await userService.updateLastConnection(req.user.email, last_connection.toString())
-            res.redirect('http://localhost:8080/products')
+            res.redirect('/products')
         } catch (error) {
             req.logger.error(error)
         }

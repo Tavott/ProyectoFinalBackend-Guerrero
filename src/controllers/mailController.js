@@ -36,7 +36,7 @@ export class MailController {
                 html: `
                 <div>
                     <h1>Click para restablecer contraseña</h1>
-                    <a href="http://localhost:8080/api/users/changePassword/${token}">Restablecer Contraseña</a>
+                    <a href="/changePassword/${token}">Restablecer Contraseña</a>
                 </div>`
             })
     
