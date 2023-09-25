@@ -36,7 +36,9 @@
         {{/each}}
     </div>
 
-    <form action="../api/payment" method="post">
+    {{!-- <form action="../api/payment" method="post"> --}}
+    {{!-- <form action="../api/payment/payment-intents" method="post"></form> --}}
+    <form action="/api/cart/{{cartId}}/purcharse" method="POST"></form>
         <button id="pago">pagar</button>
     </form>
      {{!-- {{#each productos}}
