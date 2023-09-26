@@ -1,5 +1,6 @@
 let paymentBtn = document.querySelector('#pago')
 let payContainer = document.querySelector('#payForm')
+let pagarBtn = document.querySelector('#pagar')
 
 paymentBtn.addEventListener('click', async (event)=>{
     event.preventDefault()
@@ -26,6 +27,9 @@ paymentBtn.addEventListener('click', async (event)=>{
                                         
                                                 <p>Ingrese el CVC de la tarjeta</p>
                                                 <input type="number">
+
+                                                <form action="../products" method="get">
+                                                <button id="pagar">Pagar Ahora</button>
                                             </form>`
             }
         })
