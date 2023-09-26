@@ -13,3 +13,5 @@ Ejecutar el servidor
 npm start
 ```
 
+Para poder acceder a la documentacion del Proyecto
+Utilizar /apidocs

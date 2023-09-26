@@ -14,7 +14,7 @@ paymentBtn.addEventListener('click', async (event)=>{
         .then(resp => resp.json())
         .then(resp => {
             console.log(resp)
-            console.log(resp.status.error==='error')
+            // console.log(resp.status.error==='error')
             
             if(!(resp.status==='error')){
                 payContainer.innerHTML = `  <form action="">

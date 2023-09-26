@@ -28,23 +28,22 @@
                 <form action="../api/carts/{{cart}}/product/{{this._id}}" method="delete">
                     <button type="submit">Eliminar del carrito</button>
                 </form>
-                 {{!-- <td class="text-center"><button class="btn btn-outline-danger" data-id="{{this.product._id}}">Delete</button></td> --}}
-                {{!-- <form action="../api/carts/{{cart}}/product/{{this._id}}" method="delete">
-                    <button type="submit">Eliminar del carrito</button>
-                </form> --}}
             </div>
         {{/each}}
     </div>
 
     {{!-- <form action="../api/payment" method="post"> --}}
-    {{!-- <form action="../api/payment/payment-intents" method="post"></form> --}}
-    {{!-- <form action="/api/cart/{{cartId}}/purcharse" method="POST"></form> --}}
         <button id="pago">pagar</button>
     {{!-- </form> --}}
-     {{!-- {{#each productos}}
-    <p>Total: <span id="totalAmount">{{getTotalAmount productos}}</span></p>
-    {{/each}}
-    <div id="payForm"></div> --}}
+    
+    <div id="payForm"></div>
+
+
+    {{!-- </form> --}}
+    {{!-- {{#each productos}} --}}
+    {{!-- <p>Total: <span id="totalAmount">{{getTotalAmount productos}}</span></p> --}}
+    {{!-- {{/each}} --}}
+    {{!-- <div id="payForm"></div> --}}
 
     {{!-- {{#if hasPrevPage}}
         <a href="/products?page={{prevPage}}&&query={{query}}&&limit={{limit}}"><button>Anterior</button></a>
