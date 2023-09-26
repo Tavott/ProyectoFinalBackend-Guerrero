@@ -6,7 +6,7 @@ import { rollAdminVerify, rollUserVerify } from "../middleware/rollVerify.js"
 const viewsController = new ViewsController
 
 const router = Router()
-
+router.get('auth/login', loginController.loginRender)
 router.get('/products', auth, viewsController.productsRender)
 
 router.get('/carts/:cid', viewsController.cartsRender)
