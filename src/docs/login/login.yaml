@@ -1,53 +1,53 @@
-# paths:
-#   /api/session/login:
-#     post:
-#       tags:
-#         - Auth
-#       summary: Logs in and returns the authentication cookie
-#       requestBody:
-#         requered: true
-#         description: A JSON object containing the login and password
-#         content:
-#           application/json:
-#             schema:
-#               $ref: "#/components/schemas/LoginRequest"
-#       security: []
-#       responses:
-#         "200":
-#           description: Successfully authenticated. The session ID is returned in a cookie named "AuthJwt". You need to include this cookie in subsequent requests.
-#           headers:
-#             Set-Cookie:
-#               schema:
-#                 type: string
-#                 example: AuthJwt=abcde12345; Path=/; HttpOnly
+paths:
+  /api/users:
+    get:
+      summary: Retorna todos los usuarios de manera segura (sin las contraseñas)
+      description: Devuelve una lista de todos los usuarios registrados en el sistema.
+      tags:
+        - Usuarios
+    delete:
+      summary: Elimina a todos los usuarios con más de 2 días de inactividad
+      description: Elimina a todos los usuarios que no han iniciado sesión en más de 2 días.
+      tags:
+        - Usuarios
 
-# components:
-#   schemas:
-#     LoginRequest:
-#       type: object
-#       properties:
-#         email:
-#           type: string
-#           example: adminCoder@coder.com
-#         password:
-#           type: string
-#           example: passwordHere
-#   securitySchemes:
-#     cookieAuth: 
-#       type: apiKey
-#       in: cookie
-#       name: secretKey
-#   responses:
-#   UnauthorizedError:
-#     description: Authentication information is missing or invalid
-#     content:
-#       application/json:
-#         schema:
-#           type: object
-#           properties:
-#             status:
-#               type: string
-#               example: ERROR
-#             error:
-#               type: string
-#               example: No auth token
+  /api/users/{uemail}:
+    post:
+      summary: Elimina al usuario recibido por params
+      description: Elimina al usuario correspondiente al correo electrónico proporcionado en los parámetros de la solicitud.
+      tags:
+        - Usuarios
+
+  /api/users/{uemail}/documents:
+    post:
+      summary: Agrega documentos al campo "documents" del usuario
+      description: Agrega los documentos recibidos en el cuerpo de la solicitud al campo "documents" del usuario correspondiente al correo electrónico proporcionado en los parámetros de la solicitud.
+      tags:
+        - Usuarios
+
+  /api/users/premium/{uemail}:
+    get:
+      summary: Cambia el rol del usuario a premium o user
+      description: Cambia el rol (premium o usuario) del usuario correspondiente al correo electrónico proporcionado en los parámetros de la solicitud.
+      tags:
+        - Usuarios
+
+  /api/users/changePassword/{token}:
+    get:
+      summary: Renderiza la plantilla para cambiar la contraseña
+      description: Renderiza la plantilla para que el usuario pueda ingresar una nueva contraseña después de recibir un token de restablecimiento.
+      tags:
+        - Usuarios
+
+  /api/users/changeUserPassword:
+    post:
+      summary: Cambia la contraseña del usuario en la Base de Datos
+      description: Cambia la contraseña del usuario en la base de datos después de proporcionar una nueva contraseña en el cuerpo de la solicitud.
+      tags:
+        - Usuarios
+
+  /api/users/changeRoll/{uemail}:
+    post:
+      summary: Cambia el rol del usuario a un valor especificado
+      description: Cambia el rol del usuario correspondiente al correo electrónico proporcionado en los parámetros de la solicitud al valor especificado en el cuerpo de la solicitud.
+      tags:
