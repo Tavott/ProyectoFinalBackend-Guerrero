@@ -5,6 +5,7 @@ import LoginController from "../controllers/loginController.js"
 import { rollAdminVerify, rollUserVerify } from "../middleware/rollVerify.js"
 
 const viewsController = new ViewsController
+const loginController = new LoginController
 
 const router = Router()
 router.get('auth/login', loginController.loginRender)
