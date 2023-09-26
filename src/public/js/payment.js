@@ -1,3 +1,7 @@
+let paymentBtn = document.querySelector('#pago')
+let payContainer = document.querySelector('#payForm')
+let pagarBtn = document.querySelector('#pagar')
+
 paymentBtn.addEventListener('click', async (event)=>{
     event.preventDefault()
 
@@ -11,24 +15,21 @@ paymentBtn.addEventListener('click', async (event)=>{
         .then(resp => resp.json())
         .then(resp => {
             console.log(resp)
-            
-            // Verifica si la propiedad 'status' en el objeto JSON no es igual a 'error'
-            if (resp.status !== 'error') {
-                payContainer.innerHTML = `  
-                    <form action="">
-                        <p>Ingrese el numero de la tarjeta</p>
-                        <input type="number">
-                
-                        <p>Ingrese la fecha de expiracion de la tarjeta</p>
-                        <input type="number">
-                
-                        <p>Ingrese el CVC de la tarjeta</p>
-                        <input type="number">
+                       
+            if(!(resp.status==='error')){
+                payContainer.innerHTML = `  <form action="">
+                                                <p>Ingrese el numero de la tarjeta</p>
+                                                <input type="number">
+                                        
+                                                <p>Ingrese la fecha de expiracion de la tarjeta</p>
+                                                <input type="number">
+                                        
+                                                <p>Ingrese el CVC de la tarjeta</p>
+                                                <input type="number">
 
-                        <form action="../products" method="get">
-                            <button id="pagar">Pagar Ahora</button>
-                        </form>
-                    </form>`;
+                                                <form action="../products" method="get">
+                                                <button id="pagar">Pagar Ahora</button>
+                                            </form>`
             }
         })
     } catch (error) {
