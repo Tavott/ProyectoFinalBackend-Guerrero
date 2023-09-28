@@ -1,18 +1,18 @@
 <section class="container mt-2">
   <article class="text-center">
-    <h2>Purchase</h2>
+    <h2>Compra</h2>
     
     {{#if ticket_error}}
       <div>
-        <h4>The purchase doesn't exist.</h4>
+        <h4>La Compra no Existe.</h4>
       </div>
     {{else}}
       <div>
-        <h4>The purchase was completed successfully.</h4>
+        <h4>Se ha realizado la compra de forma correcta.</h4>
         <div class="border rounded">
-            <p>Code: {{ticket.code}}</p>
-            <p>Amount: ${{ticket.amount}}</p>
-            <p>Date: {{ticket.purchase_datetime}}</p>
+            <p>Ticket: {{ticket.code}}</p>
+            <p>total: ${{ticket.amount}}</p>
+            <p>fecha: {{ticket.purchase_datetime}}</p>
         </div>
       </div>
     {{/if}}

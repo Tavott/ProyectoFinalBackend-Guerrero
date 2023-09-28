@@ -1,12 +1,12 @@
 <section class="cart_container">
-  <h2 id="cart" data-id="{{_id}}" class="my-2">Cart</h2>
+  <h2 id="cart" data-id="{{_id}}" class="my-2">Carrito</h2>
   {{#if display}}
     <article class="container border rounded p-2" id="exist-products">
       <table class="table table-striped">
         <thead class="rounded">
           <tr>
-            <th scope="col">Product</th>
-            <th scope="col">Unit Price</th>
+            <th scope="col">Productos</th>
+            <th scope="col">Precio</th>
             <th scope="col">Quantity</th>
             <th scope="col">Action</th>
           </tr>
@@ -17,13 +17,13 @@
             <td><strong>{{this.product.title}}</strong></td>
             <td><strong>$ {{this.product.price}}</strong></td>
             <td class="text-center"><strong>{{this.quantity}}</strong></td>
-            <td class="text-center"><button class="btn btn-outline-danger" data-id="{{this.product._id}}">Delete</button></td>
+            <td class="text-center"><button class="btn btn-outline-danger" data-id="{{this.product._id}}">Eliminar</button></td>
           </tr>
           {{/each}}
         </tbody>
       </table>
       <div class="d-flex justify-content-end">
-        <a class="btn btn-outline-dark" id="close-cart">Close cart</a>
+        <a class="btn btn-outline-dark" id="close-cart">Finalizar compra</a>
       </div>
     </article>
     <div id="no-exist-products" style="display: none;">

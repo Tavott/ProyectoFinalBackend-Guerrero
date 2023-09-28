@@ -1,5 +1,5 @@
 <section class="products">
-  <h1>Products</h1>
+  <h1>Productos</h1>
   {{#if error}}
   <p class="message">La pagina solicitada no existe.</p>
   <a href="/products" class="btn-primary">Regresar</a>
@@ -24,7 +24,7 @@
           <p class="card-text">$ {{this.price}}</p>
           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             {{!-- <a class="btn btn-primary me-md-2"  href="/product/{{this._id}}" type="button">Detail</a> --}}
-            <button class="btn btn-primary addtocart" data-id="{{this._id}}" type="button">Add to cart</button>
+            <button class="btn btn-primary addtocart" data-id="{{this._id}}" type="button">Agregar</button>
           </div>
         </div>
       </div>
@@ -34,13 +34,13 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination">
           {{#if pag.prevLink}}
-            <li class="page-item"><a class="page-link" href="{{pag.prevLink}}" >Previous</a></li>
+            <li class="page-item"><a class="page-link" href="{{pag.prevLink}}" >Previa</a></li>
           {{else}}
            <li class="page-item"><a class="page-link disabled">Previous</a></li>
            {{/if}}
           <li class="page-item"><a class="page-link">{{pag.page}}</a></li>
           {{#if pag.nextLink}}
-            <li class="page-item"><a class="page-link" href="{{pag.nextLink}}" >Next</a></li>
+            <li class="page-item"><a class="page-link" href="{{pag.nextLink}}" >Siguiente</a></li>
           {{else}}
             <li class="page-item"><a class="page-link disabled">Next</a></li>
            {{/if}}
