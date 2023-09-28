@@ -52,7 +52,7 @@ const productRouter = new ProductsRouterClass();
 const messageRouterClass = new MessageRouterClass();
 const loggerRouter = new LoggerRouterClass();
 
-initializePassport();
+initialibzePassport();
 app.use(passport.initialize());
 app.use(cookieParser());
 app.use(cors());
