@@ -1,160 +1,88 @@
-import express from 'express'
-import handlebars from 'express-handlebars'
-import { Server } from 'socket.io'
-import session from 'express-session'
-import passport from 'passport'
+// ? Utils config
+import { __dirname } from "./utils.js";
+// ? Archivos de rutas.
+import CartRouterClass from "./routes/cart.router.js";
+import ProductsRouterClass from "./routes/product.router.js";
+import ViewsRouterClass from "./routes/view.router.js";
+import SessionRouterClass from "./routes/session.router.js";
+import MessageRouterClass from "./routes/message.router.js";
+import LoggerRouterClass from "./routes/logger.router.js";
+// ? Handlebars
+import handlebars from "express-handlebars";
+// ? Express
+import express from "express";
+// ? CORS
+import cors from "cors";
+// ? SocketIO
+import { Server } from "socket.io";
+// ? Cookies
+import cookieParser from "cookie-parser";
+// ? Passport
+import passport from "passport";
+import initializePassport from "./config/passport.config.js";
+import { MESSAGE_SERVICES } from "./services/servicesManager.js";
+import dotenv from "dotenv";
+import { addLogger } from "./middleware/logger.js";
+import swaggerJsdoc from "swagger-jsdoc";
+import swaggerUiExpress from "swagger-ui-express";
 
-import productsRouter from './routes/products.js'
-import cartsRouter from './routes/carts.js'
-import viewsRouter from './routes/views.js'
-import loginRouter from './routes/login.js'
-import sessionsRouter from './routes/sessions.js'
-import mockingRouter from './routes/mocking.js'
-import loggerRouter from './routes/logger.js'
-import usersRouter from './routes/user.js'
-import mailRouter from './routes/mail.js'
-import paymentRouter from './routes/payment.js'
+dotenv.config();
 
-import __dirname from './utils.js'
-import { ProductManager } from './dao/fileSystem/productManager.js'
-import ProductsService from './services/productsService.js'
-import dbConnection from './config/dbConnection.js'
-import chatModel from "./dao/mongo/models/chat.js"
-import { initPassport } from './config/passport.js'
-import errorMid from './middleware/errorMid.js'
-import { addLogger } from './utils/logger.js'
-
-import swaggerJsDoc from 'swagger-jsdoc'
-import swaggerUiExpress from 'swagger-ui-express'
-
-const app = express()
-const PORT = 8080
-// const PORT = 3050
-
-dbConnection()
-
-
-const productManager = new ProductManager
-const productsService = new ProductsService
-
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
-
-app.use(session({
-    secret: 'secretCoder',
-    resave: false,
-    saveUninitialized: false
-}))
-
-initPassport()
-app.use(passport.initialize())
-app.use(passport.session())
-
-app.use(errorMid)
-app.use(addLogger)
-
-app.use('/public' ,express.static(__dirname+'/public'))
-
-app.engine('handlebars', handlebars.engine())
-app.set('views', __dirname+'/views')
-app.set('view engine', 'handlebars')
+const app = express();
 
 const swaggerOptions = {
-    definition: {
-        openapi: '3.0.1',
-        info: {
-            title: 'Documentación de Proyecto CoderHouse Comision-51220',
-            description: 'Proyecto desarrollado por Gustavo Guerrero'
-        }
+  definition: {
+    openapi: "3.0.1",
+    info: {
+      title: "E commerce",
+      description:
+        "E-Commerce de productos de indumentaria de Leandro Fernandez",
     },
-    apis: [`${__dirname}/docs/**/*.yaml`]
-}
+  },
+  apis: [`${__dirname}/docs/*/*.yaml`],
+};
 
-const specs = swaggerJsDoc(swaggerOptions)
+const specs = swaggerJsdoc(swaggerOptions);
+app.use("/apidocs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 
-app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
+const viewsRouter = new ViewsRouterClass();
+const cartRouter = new CartRouterClass();
+const sessionRouter = new SessionRouterClass();
+const productRouter = new ProductsRouterClass();
+const messageRouterClass = new MessageRouterClass();
+const loggerRouter = new LoggerRouterClass();
 
-app.use('/', viewsRouter)
-app.use('/auth', loginRouter)
-app.use('/api/products', productsRouter)
-app.use('/api/carts', cartsRouter)
-app.use('/api/sessions', sessionsRouter)
-app.use('/api/users', usersRouter)
-app.use('/api/mail', mailRouter)
-app.use('/api/payment', paymentRouter)
+initializePassport();
+app.use(passport.initialize());
+app.use(cookieParser());
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(`${__dirname}/public`));
 
-app.use('/mockingproducts', mockingRouter)
-app.use('/loggerTest', loggerRouter)
+app.use(addLogger);
+app.engine("handlebars", handlebars.engine());
+app.set("views", `${__dirname}/views`);
+app.set("view engine", "handlebars");
 
-const httpServer = app.listen(PORT, (err)=>{
-    if (err) console.log(err)
-    console.log('Escuchando puerto: ', PORT);
-})
+app.use("/", viewsRouter.getRouter());
+app.use("/api/session", sessionRouter.getRouter());
+app.use("/api/carts", cartRouter.getRouter());
+app.use("/api/chat", messageRouterClass.getRouter());
+app.use("/api/products", productRouter.getRouter());
+app.use("/api/logger", loggerRouter.getRouter());
 
-httpServer.on
+const socketio = app.listen(process.env.PORT, () =>
+  console.log(`Server running at http://localhost:${process.env.PORT}`)
+);
 
-const socketServer = new Server(httpServer)
+const io = new Server(socketio);
+app.set("socketio", io);
 
-let productos
-let mensajes
-
-socketServer.on('connection', async socket => {
-    console.log('Nuevo cliente conectado')
-    try {
-        productos = await productsService.getProductsWithOutPaginate()
-        console.log(productos);
-        mensajes = await chatModel.find()
-        socket.emit('mensajeServer', productos)
-        socket.emit('mensajesChat', mensajes)
-    } catch (error) {
-        console.log(error)
-    }
-
-    socket.on('product', async data => {
-        console.log('data: ', data)
-
-        const   {
-            title,
-            description,
-            code,
-            price,
-            stock,
-            category,
-            thumbnail,
-            owner
-        } = data
-
-        if (!title || !description || !code || !price || !stock || !category || !owner) {
-            console.log('datos invalidos')
-        }else{
-            try {
-                await productsService.addProduct({title, description, price, thumbnail, code, stock, category, owner})
-                let datos = await productsService.getProductsWithOutPaginate()
-                socketServer.emit('productoAgregado', datos)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-    })
-
-    socket.on('deleteProduct', async data => {
-        try {
-            await productsService.deleteProduct(data)
-            let datos = await productsService.getProductsWithOutPaginate()
-            socketServer.emit('prodcutoEliminado', datos)
-        } catch (error) {
-            console.log(error)
-        }
-    })
-
-    socket.on('msg', async data => {
-        console.log(data);
-        try {
-            await chatModel.insertMany(data)
-            let datos = await chatModel.find()
-            socketServer.emit('newMsg', datos)
-        } catch (error) {
-            console.log(error)
-        }
-    })
-})
+io.on("connection", (socket) => {
+  socket.on("newuser", async ({ user }) => {
+    socket.broadcast.emit("newuserconnected", { user: user });
+    let messages = await MESSAGE_SERVICES.getMessages();
+    io.emit("messageLogs", messages);
+  });
+});
