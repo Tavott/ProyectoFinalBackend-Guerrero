@@ -58,7 +58,7 @@
   const price = '{{sort}}'
   function selectedInput(key, filter){
     const elementList = document.getElementById(key);
-    const listOptions = [...elementList.options];
+    //const listOptions = [...elementList.options];
     listOptions.forEach((option) => {
       if(option.value == filter) option.setAttribute('selected',true);
     });
