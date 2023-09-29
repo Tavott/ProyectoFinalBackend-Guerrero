@@ -11,6 +11,14 @@
       </div>
       <form class="row row-cols-lg-auto g-3 align-items-center mb-2" action="/products" method="get" >
         <div class="col-12">
+           <select class="form-select" name="query" id="query">
+            <option value="">Select a Category</option>
+            <option value="remeras">Remeras</option>
+            <option value="calzado">Calzados</option>
+            <option value="pantalones">Pantalones</option>
+            <option value="mochilas">Mochilas</option>
+          </select>
+        </div>
         <div class="col-12">
         </div>
       </form>
@@ -58,11 +66,11 @@
   const price = '{{sort}}'
   function selectedInput(key, filter){
     const elementList = document.getElementById(key);
-    //const listOptions = [...elementList.options];
-    //listOptions.forEach((option) => {
-      //if(option.value == filter) option.setAttribute('selected',true);
-    //});
+    const listOptions = [...elementList.options];
+    listOptions.forEach((option) => {
+      if(option.value == filter) option.setAttribute('selected',true);
+    });
   }
-  //selectedInput('query',category)
+  selectedInput('query',category)
   selectedInput('sort',price)
 </script>
