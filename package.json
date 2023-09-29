@@ -6,8 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "nodemon": "set NODE_ENV=mongo nodemon src/app.js ",
-    "start": " node src/app.js ",
+    "nodemon": "set NODE_ENV=mongo&& nodemon src/app.js ",
+    "start": "set NODE_ENV=mongo&& node src/app.js ",
     "mongo": "set NODE_ENV=mongo&& node src/app.js ",
     "files": "set NODE_ENV=files&& node src/app.js"
   },
