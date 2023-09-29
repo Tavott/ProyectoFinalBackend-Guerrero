@@ -52,8 +52,8 @@ const productRouter = new ProductsRouterClass();
 const messageRouterClass = new MessageRouterClass();
 const loggerRouter = new LoggerRouterClass();
 
-initializePassport();
-app.use(passport.initialize());
+// initializePassport();
+// app.use(passport.initialize());
 app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
