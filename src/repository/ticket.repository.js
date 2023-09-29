@@ -14,4 +14,8 @@ export default class TicketRepository {
     async getTicket(code) {
         return await this.DAO.getTicket(code)
     }
+
+    async getAllTickets() {
+        return await this.DAO.getAllTickets();
+    }
 }

@@ -7,6 +7,7 @@ import ViewsRouterClass from "./routes/view.router.js";
 import SessionRouterClass from "./routes/session.router.js";
 import MessageRouterClass from "./routes/message.router.js";
 import LoggerRouterClass from "./routes/logger.router.js";
+import TicketRouterClass from "./routes/tickets.router.js";
 // ? Handlebars
 import handlebars from "express-handlebars";
 // ? Express
@@ -51,6 +52,7 @@ const sessionRouter = new SessionRouterClass();
 const productRouter = new ProductsRouterClass();
 const messageRouterClass = new MessageRouterClass();
 const loggerRouter = new LoggerRouterClass();
+const ticketsRouter = new TicketRouterClass()
 
 initializePassport();
 app.use(passport.initialize());
@@ -71,6 +73,7 @@ app.use("/api/carts", cartRouter.getRouter());
 app.use("/api/chat", messageRouterClass.getRouter());
 app.use("/api/products", productRouter.getRouter());
 app.use("/api/logger", loggerRouter.getRouter());
+app.use("/api/tickets", ticketsRouter.getRouter());
 
 const socketio = app.listen(process.env.PORT, () =>
   console.log(`Server running at http://localhost:${process.env.PORT}`)

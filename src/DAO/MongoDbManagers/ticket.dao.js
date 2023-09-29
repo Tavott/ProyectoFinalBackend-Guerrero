@@ -21,4 +21,14 @@ export default class TicketManagerDB {
       return { error: error.message };
     }
   }
+
+  async getAllTickets() {
+    try {
+        const tickets = await ticketModel.find(); // Busca todos los tickets en la base de datos
+        return tickets;
+    } catch (err) {
+        console.error(err);
+        throw new Error('Error al obtener todos los tickets');
+    }
+  }
 }
